@@ -1,9 +1,51 @@
 body {
   background-color: #333;
-  color: #ccc;
+
   font-family: sans-serif;
-  padding: 0 1rem;
+  padding: 0 5px;
   h1 {
     color: gold;
+  }
+  .germanNouns {
+    span {
+      font-style: italic;
+      color: lightgreen;
+    }
+    .buttonsRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      width: fit-content;
+    }
+    @mixin btn($name, $bgColor, $borderColor) {
+      .#{$name} {
+        padding: 7px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        background-color: $bgColor;
+        border: 2px solid $borderColor;
+        cursor: pointer;
+        &:focus:not(.hide) {
+          background-color: lighten($bgColor, 30%);
+        }
+      }
+    }
+    $buttons: der lightblue blue, die lightgreen green, das gold orange,
+      hide tomato red;
+    @each $name, $bgColor, $borderColor in $buttons {
+      @include btn($name, $bgColor, $borderColor);
+    }
+
+    .nouns {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-column-gap: 6px;
+      grid-row-gap: 6px;
+      margin-top: 1rem;
+      .noun {
+        padding: 10px;
+      }
+    }
   }
 }
