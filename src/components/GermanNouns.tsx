@@ -11,7 +11,7 @@ interface IGermanNoun {
 }
 
 export const GermanNouns = () => {
-  const [nouns, setNouns] = useState([]);
+  const [nouns, setNouns] = useState<IGermanNoun[]>([]);
   const [choice, setChoice] = useState("hide");
 
   useEffect(() => {
@@ -20,6 +20,20 @@ export const GermanNouns = () => {
       setNouns(response);
     })();
   }, []);
+  const handleArticleButton = (articleName: string) => {
+    const selectedNoun = nouns.filter((noun) => noun.article === articleName);
+
+    const reorderedNouns = selectedNoun.concat(
+      nouns.filter((noun) => noun.article !== articleName)
+    );
+    if (articleName === "hide") {
+      (async () => {
+        setNouns((await axios.get(germanNounsUrl)).data);
+      })();
+    }
+    setNouns(reorderedNouns);
+    setChoice(articleName);
+  };
 
   return (
     <div className="germanNouns">
@@ -27,16 +41,16 @@ export const GermanNouns = () => {
       <span>There are {nouns.length} nouns.</span>
       <hr />
       <div className="buttonsRow">
-        <button className="derBnt" onClick={() => setChoice("der")}>
+        <button className="derBnt" onClick={() => handleArticleButton("der")}>
           Der
         </button>
-        <button className="dieBnt" onClick={() => setChoice("die")}>
+        <button className="dieBnt" onClick={() => handleArticleButton("die")}>
           Die
         </button>
-        <button className="dasBnt" onClick={() => setChoice("das")}>
+        <button className="dasBnt" onClick={() => handleArticleButton("das")}>
           Das
         </button>
-        <button className="hideBnt" onClick={() => setChoice("hide")}>
+        <button className="hideBnt" onClick={() => handleArticleButton("hide")}>
           Hide
         </button>
       </div>
