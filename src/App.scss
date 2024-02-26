@@ -31,8 +31,8 @@ body {
         }
       }
     }
-    $buttons: der lightblue blue, die lightgreen green, das gold orange,
-      hide tomato red;
+    $buttons: derBnt lightblue blue, dieBnt lightgreen green, dasBnt gold orange,
+      hideBnt tomato red;
     @each $name, $bgColor, $borderColor in $buttons {
       @include btn($name, $bgColor, $borderColor);
     }
@@ -45,6 +45,16 @@ body {
       margin-top: 1rem;
       .noun {
         padding: 10px;
+        background-color: #444;
+      }
+      .der {
+        background-color: rgb(37, 158, 199);
+      }
+      .die {
+        background-color: rgb(73, 173, 73);
+      }
+      .das {
+        background-color: rgb(175, 156, 50);
       }
     }
   }

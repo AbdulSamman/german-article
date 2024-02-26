@@ -27,16 +27,16 @@ export const GermanNouns = () => {
       <span>There are {nouns.length} nouns.</span>
       <hr />
       <div className="buttonsRow">
-        <button className="der" onClick={() => setChoice("der")}>
+        <button className="derBnt" onClick={() => setChoice("der")}>
           Der
         </button>
-        <button className="die" onClick={() => setChoice("die")}>
+        <button className="dieBnt" onClick={() => setChoice("die")}>
           Die
         </button>
-        <button className="das" onClick={() => setChoice("das")}>
+        <button className="dasBnt" onClick={() => setChoice("das")}>
           Das
         </button>
-        <button className="hide" onClick={() => setChoice("hide")}>
+        <button className="hideBnt" onClick={() => setChoice("hide")}>
           Hide
         </button>
       </div>
@@ -45,9 +45,8 @@ export const GermanNouns = () => {
           return (
             <div
               key={index}
-              className="noun"
+              className={`noun ${choice === noun.article && choice}`}
               style={{
-                backgroundColor: noun.article == choice ? "green" : "#444",
                 color: noun.article == choice ? "#fff" : "#aaa",
               }}>
               {choice === noun.article && <>{noun.article}</>} {noun.singular}
